@@ -1,0 +1,40 @@
+<div class="form-header">
+  <% if (Object.keys(errors).length === 0) { %>
+    <h2>Укажите параметры новой базы</h2>
+  <% } else { %>
+    <h2 class="errors-heading">Необходимо заполнить поля:</h2>
+    <ul class="errors-list">
+      <% Object.values(errors).forEach(error => { %>
+        <li><%= error.msg %></li>
+      <% }) %>
+    </ul>
+  <% } %>
+</div>
+
+<form method="post" action="/newbase" novalidate>
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+  <div class="form-field <%= errorMap.base_name ? 'form-field-invalid' : '' %>">
+    <label for="base_name">Имя базы</label>
+    <textarea class="input" id="base_name" name="base_name" rows="1" autofocus><%= data.base_name %></textarea>
+    <% if (errorMap.base_name) { %>
+      <div class="error"><%= errorMap.base_name.msg %></div>
+    <% } %>
+  </div>
+  <div class="form-field <%= errorMap.appserver_name ? 'form-field-invalid' : '' %>">
+    <label for="appserver_name">Имя сервера приложений</label>
+    <textarea class="input" id="appserver_name" name="appserver_name" rows="1" autofocus><%= data.appserver_name %></textarea>
+    <% if (errorMap.appserver_name) { %>
+      <div class="error"><%= errorMap.appserver_name.msg %></div>
+    <% } %>
+  </div>
+  <div class="form-field <%= errorMap.bdserver_name ? 'form-field-invalid' : '' %>">
+    <label for="bdserver_name">Имя сервера БД</label>
+    <textarea class="input" id="bdserver_name" name="bdserver_name" rows="1" autofocus><%= data.bdserver_name %></textarea>
+    <% if (errorMap.bdserver_name) { %>
+      <div class="error"><%= errorMap.bdserver_name.msg %></div>
+    <% } %>
+  </div>
+  <div class="form-actions">
+    <button class="btn" type="submit">Добавить</button>
+  </div>
+</form>
