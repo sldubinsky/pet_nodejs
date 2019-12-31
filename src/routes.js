@@ -83,10 +83,17 @@ router.post('/newbase', [
 
   const data = matchedData(req)
   console.log('Sanitized: ', data)
-  console.log(process.env.USERNAME);
-  // Homework: send sanitized data in an email or persist in a db
+  var fs = require('fs');
+  var base_list = [];
+  if (fs.existsSync("bases.json")){
+    // читаем из файла
+    base_list = JSON.parse(fs.readFileSync("bases.json", "UTF-8"));
+  }
+  // добавим в массив новые данные
+  base_list.push(data);
+  fs.writeFileSync("bases.json", JSON.stringify(base_list));
 
-  req.flash('success', 'Thanks for the message! I‘ll be in touch :)')
+  req.flash('success', 'База добавлена в список')
   res.redirect('/')
 })
 
