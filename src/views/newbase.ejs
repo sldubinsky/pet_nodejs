@@ -22,18 +22,32 @@
   </div>
   <div class="form-field <%= errorMap.appserver_name ? 'form-field-invalid' : '' %>">
     <label for="appserver_name">Имя сервера приложений</label>
-    <textarea class="input" id="appserver_name" name="appserver_name" rows="1" autofocus><%= data.appserver_name %></textarea>
+    <select class="input" id="appserver_name" name="appserver_name">
+      <option value="">Укажите сервер приложений</option>
+      <% app_srv.forEach(srv => { %>
+      <option value="<%= srv %>"><%= srv %></option>
+      <% }) %>
+    </select>
     <% if (errorMap.appserver_name) { %>
       <div class="error"><%= errorMap.appserver_name.msg %></div>
     <% } %>
   </div>
+  <% if (isAdmin) { %>
   <div class="form-field <%= errorMap.bdserver_name ? 'form-field-invalid' : '' %>">
     <label for="bdserver_name">Имя сервера БД</label>
-    <textarea class="input" id="bdserver_name" name="bdserver_name" rows="1" autofocus><%= data.bdserver_name %></textarea>
+    <select class="input" id="bdserver_name" name="bdserver_name">
+      <option value="">Укажите сервер БД</option>
+      <% bd_srv.forEach(srv => { %>
+      <option value="<%= srv %>"><%= srv %></option>
+      <% }) %>
+      </select>
     <% if (errorMap.bdserver_name) { %>
       <div class="error"><%= errorMap.bdserver_name.msg %></div>
     <% } %>
   </div>
+  <% } else { %>
+  <input type="hidden" name="bdserver_name" id="bdserver_name" value="BD_DEFAULT">
+  <% } %>
   <div class="form-actions">
     <button class="btn" type="submit">Добавить</button>
   </div>

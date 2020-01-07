@@ -3,5 +3,33 @@
 <% } %>
 
 <h1>Настройка тестовых баз</h1>
-
+<br>
+Пользователь: <%= username %>
+<br>
+<% if (isAdmin){ %>
+<%- include("./adminka.ejs") %>
+<br>
+<% } %>
+<p></p>
 <a href="/newbase">Добавить тестовую базу</a>
+<br>
+<table border="1" cellspacing = "0" width = 800 cellpadding = "4">
+  <tr>
+    <th>Имя базы</th>
+    <th>APP сервер</th>
+    <th>Прототип</th>
+    <th></th>
+  </tr>
+  <% bases_list.forEach(base => { %>
+  <tr>
+    <td><%= base.base_name %></td>
+    <td><%= base.server_app %></td>
+    <td><%= base.prototype %></td>
+    <td>
+      <a href="/jenkins/restore">восстановить</a><br>
+      <a href="/jenkins/update">обновить</a><br>
+      <a href="/jenkins/delete">удалить</a><br>
+    </td>
+  </tr>
+  <% }) %>
+</table>

@@ -1,0 +1,28 @@
+<div class="form-header">
+  <% if (Object.keys(errors).length === 0) { %>
+    <h2>Выберите пользователя</h2>
+  <% } else { %>
+    <h2 class="errors-heading">Необходимо заполнить поля:</h2>
+    <ul class="errors-list">
+      <% Object.values(errors).forEach(error => { %>
+        <li><%= error.msg %></li>
+      <% }) %>
+    </ul>
+  <% } %>
+</div>
+
+<form method="post" action="/signin" novalidate>
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+  <div class="form-field">
+    <label for="user_id">ИД пользователя</label>
+    <select class="input" id="user_id" name="user_id">
+      <option value="">Выберите пользователя</option>
+    <% Object.values(users).forEach(user => { %>
+      <option value="<%= user.user_id %>"><%= user.user_name %></option>
+    <% }) %>
+    </select>
+  </div>
+  <div class="form-actions">
+    <button class="btn" type="submit">Выбрать</button>
+  </div>
+</form>

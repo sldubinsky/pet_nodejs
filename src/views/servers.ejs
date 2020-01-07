@@ -1,0 +1,23 @@
+<h1>Список серверов</h1>
+<br>
+Пользователь: <%= username %>
+<br>
+<%- include("./adminka.ejs") %>
+<br>
+<p></p>
+<a href="/newserver">Добавить сервер</a>
+<br>
+<table border="1" cellspacing = "0" width = 800 cellpadding = "4">
+    <tr>
+        <th>Сервер</th>
+        <th>Описание</th>
+        <th>Тип сервера</th>
+    </tr>
+    <% servers_list.forEach(server => { %>
+    <tr>
+        <td><%= server.server_name %></td>
+        <td><%= server.server_description %></td>
+        <td><% if(server.server_type == 0) { %>Приложений<% }else{ %>Баз данных<%} %></td>
+    </tr>
+    <% }) %>
+</table>

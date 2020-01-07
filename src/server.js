@@ -20,7 +20,7 @@ const middlewares = [
   express.static(path.join(__dirname, 'public')),
   bodyParser.urlencoded(),
   cookieParser('super-secret-key'),
-  session({ cookie: { maxAge: 60000 } }),
+  session({ cookie: { maxAge: 600000 } }),
   csrf({ cookie: true }),
   validator({ extended: false }),
   flash()
